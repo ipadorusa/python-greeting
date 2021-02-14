@@ -3,7 +3,16 @@ from selenium import webdriver
 
 
 
-driver = webdriver.Chrome('chromedriver')
+options = webdriver.ChromeOptions()
+options.add_argument("start-maximized")
+options.add_argument("lang=ko_KR")
+options.add_argument('headless')
+options.add_argument('window-size=1920x1080')
+options.add_argument("disable-gpu")
+options.add_argument("--no-sandbox")
+
+# chrome driver
+driver = webdriver.Chrome('chromedriver', chrome_options=options)
 driver.implicitly_wait(3)
 
 driver.get('https://www.greating.co.kr/login/login?reurl=https%3A%2F%2Fwww.greating.co.kr%2Findex#')
