@@ -30,10 +30,12 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Setup Chromedriver
+      uses: nanasess/setup-chromedriver@v1.0.1
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        
     - name: Test With CrossBrowserTesting
       run: |
         python3 main.py 
