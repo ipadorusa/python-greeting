@@ -1,38 +1,39 @@
-# This workflow will upload a Python Package using Twine when a release is created
-# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
-
-name: Upload Python Package
-
-on:
-  schedule:
-     - cron: '55 22 * * *' # UST 가 default. UST 22:55는 한국시간 07:55
-  release:
-    types: [created]
-
-jobs:
-  deploy:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.9'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install selenium
-    - name: Install ubuntu package # 우분투 관련 패키지도 설치한 후
-      run: |        
-        sudo apt-get install fonts-unfonts-core
-        sudo apt-get install fonts-unfonts-extra
-        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add        
-        sudo apt-get install google-chrome-stable    
-        wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
-        unzip ./chromedriver_linux64.zip   
+name: Python application
+	
+  on:
+    schedule:
+     - cron: "0 0/4 * * *"
       
-    - name: Run! # send_to_weather.py 파일을 실행하시오! 
-      run: | 
-        python ./main.py
+    push:
+      branches: [ master ]
+    pull_request:
+      branches: [ master ]
+	
+  jobs:
+    build:
+	
+      runs-on: ubuntu-latest
+	
+      steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Test echo
+        run: |
+          echo "hi" 
+      - name: Test python -h
+        run: |
+          python3 -h
