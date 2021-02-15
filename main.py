@@ -25,6 +25,3 @@ driver.implicitly_wait(3)
 driver.get('https://www.greating.co.kr/event/eventCheckAttendance?evEventId=2978#page1')
 submit = driver.find_element_by_id('btnCheck')
 submit.click()
-
-driver.implicitly_wait(5)
-driver.quit()
