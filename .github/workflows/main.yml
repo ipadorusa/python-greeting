@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   schedule:
-    - cron: "0 0/4 * * *"
+    - cron: "0 0/2 * * *"
   push:
     branches: [ main ]
   pull_request:
@@ -22,7 +22,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.7, 3.8]
+        python-version: [3.8]
 
     steps:
     - uses: actions/checkout@v1
