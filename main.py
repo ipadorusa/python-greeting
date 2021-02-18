@@ -1,7 +1,7 @@
 from selenium import webdriver
 
 # chrome driver
-driver = webdriver.Chrome('chromedriver')
+driver = webdriver.Chrome(executable_path='./chromedriver')
 driver.implicitly_wait(3)
 
 driver.get('https://www.greating.co.kr/login/login?reurl=https%3A%2F%2Fwww.greating.co.kr%2Findex#')
