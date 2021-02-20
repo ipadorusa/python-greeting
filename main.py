@@ -1,4 +1,7 @@
+import os.path
 from selenium import webdriver
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')               # headless
@@ -6,7 +9,8 @@ options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--disable-gpu')
 
-driver = webdriver.Chrome(chrome_driver, options=options)
+driver_path = os.path.join(CURRENT_DIR, './chromedriver')
+driver = webdriver.Chrome(driver_path, chrome_options=options)
 driver.implicitly_wait(3)
 
 driver.get('https://www.greating.co.kr/login/login?reurl=https%3A%2F%2Fwww.greating.co.kr%2Findex#')
