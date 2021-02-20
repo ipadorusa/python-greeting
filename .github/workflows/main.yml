@@ -33,13 +33,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install -r requirements.txt
         pip install selenium
-        
-    - name: Download chromedriver
-      run: |
-        wget -q -O tmp.zip https://chromedriver.storage.googleapis.com/81.0.4044.69/chromedriver_linux64.zip
-        unzip tmp.zip && rm tmp.zip
-        
+    
     - name: Test With CrossBrowserTesting
       run: |
         python3 main.py 
