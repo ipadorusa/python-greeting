@@ -10,7 +10,7 @@ options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--disable-gpu')
 
 driver_path = os.path.join(CURRENT_DIR, './chromedriver')
-driver = webdriver.Chrome(driver_path, chrome_options=options)
+driver = webdriver.Chrome(driver_path, options=options)
 driver.implicitly_wait(3)
 
 driver.get('https://www.greating.co.kr/login/login?reurl=https%3A%2F%2Fwww.greating.co.kr%2Findex#')
