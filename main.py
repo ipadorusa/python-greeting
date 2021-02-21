@@ -5,9 +5,9 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')               # headless
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
-options.add_argument('--disable-gpu')
+# options.add_argument('--no-sandbox')
+# options.add_argument('--disable-dev-shm-usage')
+# options.add_argument('--disable-gpu')
 
 driver_path = os.path.join(CURRENT_DIR, './chromedriver')
 driver = webdriver.Chrome(driver_path, options=options)
